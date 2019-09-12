@@ -1,0 +1,10 @@
+number = input("Enter a number from 1 to 12: ")
+noun = input("Enter a noun (plural): ")
+name = input("Enter a name: ")
+sentence = input("Enter any sentence: ")
+verb = input("Enter any verb: ")
+
+print('It was ' + number + ' o\'clock when I heard a knock at the door.')
+print('I opened the door and there was a box full of ' + noun + ' with a note saying "From Mr. ' + name.title() + '."')
+print('Just as I closed the door I heard a scream "' + sentence.upper() + '."')
+print('I froze in place and all I could do was ' + verb + '.')
