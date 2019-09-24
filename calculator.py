@@ -1,18 +1,28 @@
-number_1 = int(input("Enter the first number: "))
-number_2 = int(input("Enter the second number: "))
+import sys
 
-if ((number_1) >= 0 or (number_1) <= 0) and ((number_2) >= 0 or (number_2) <= 0):
-	operation = input("Enter the operation required: ")
-	if operation == "+":
-		print(number_1 + number_2)
-	elif operation == "-":
-		print(number_1 - number_2)
-	elif operation == "*":
-		print(number_1 * number_2)
-	elif operation == "/":
-		print(number_1 / number_2)
-	else:
-		print("Operation is not valid!")
+number_1 = input("Enter the first number: ")
+try:
+	val = float(number_1)
+except ValueError:
+	print("The input was not a number! Try again")
+	sys.exit()
+number_2 = input("Enter the second number: ")
+try:
+	val = float(number_2)
+except ValueError:
+	print("The input was not a number! Try again")
+	sys.exit()
+
+operation = input("Enter the operation required: ")
+if operation == "+":
+	print(float(number_1) + float(number_2))
+elif operation == "-":
+	print(float(number_1) - float(number_2))
+elif operation == "*":
+	print(float(number_1) * float(number_2))
+elif operation == "/":
+	print(float(number_1) / float(number_2))
 else:
-	print("Sorry invalid input! Try again")
+	print("Operation is not valid!")
+
 
