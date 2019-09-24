@@ -1,4 +1,5 @@
 import math
+import sys
 grocery_items = []
 dictionary = {}
 print("Welcome to the Simple Receipt calculator")
@@ -16,19 +17,28 @@ while True:
     if useritem == "done":
         break
     elif useritem != "done":
-        userprice = float(input("Please enter the price of the item: "))
-        userquantity = int(input("Please enter the quantity of the item: "))
-        package(useritem, userprice, userquantity)
+        userprice = input("Please enter the price of the item: ")
+        try:
+            val = float(userprice)
+        except ValueError:
+            print("Input was not a number! Please try again")
+            sys.exit()
+        userquantity = input("Please enter the quantity of the item: ")
+        try:
+            val = int(userquantity)
+        except ValueError:
+            print("Input was not a whole number! Please try again")
+            sys.exit()
+        package(useritem, float(userprice), int(userquantity))
         continue
 total_due = 0
-for item in grocery_items:
-    total_due += float((item["price"] * item["quantity"]))
 
 print("""
 -------------- RECEIPT ----------------
 """)
 for item in grocery_items:
     print(item["name"] + " = {}".format(item["quantity"]) + ", each for KD {}".format(item["price"]))
+    total_due += (item["price"] * item["quantity"])
 print("""
 ---------------------------------------""")    
 print("The total amount due is: KD {}".format(round(total_due, 3)))
