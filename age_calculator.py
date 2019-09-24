@@ -1,35 +1,27 @@
 from datetime import datetime
+from dateutil import relativedelta
+import sys
 now = datetime.now()
-def check_birthdate(month, day, year):
-  if (year) > now.year:
-    return False
-  elif (year) == now.year and (month) > now.month:
-    return False
-  elif (year) == now.year and (month) == now.month and (day) > now.day:
-    return False
-  else:
-    return True
-  
-def calculate_age(month, day, year):
-  age = int(now.year - (year))
-  if month < now.month:
-    print("Your are " + str(age) + " years old")
-  elif month == now.month and day < now.day:
-    print("Your are " + str(age) + " years old")
-  elif month == now.month and day == now.day:
-    print("Your are " + str(age) + " years old")
-  elif month == now.month and day > now.day:
-    print("Your are " + str(age - 1) + " years old")
-  elif month > now.month:
-    print("Your are " + str(age - 1) + " years old")
-  else:
-    print("Invalid birthdate")
-  
-birthyear = int(input("Enter your year of birth in the format YYYY: "))
-birthmonth = int(input("Enter your month of birth in the format MM: "))
-birthday = int(input("Enter your day of birth in the format DD: "))
+try:
+    iyears = int(input("Please write the year in which you were born: "))
+    imonths = int(input("Please write the month in which you were born: "))
+    idays = int(input("Please write the day in which you were born: "))
+except ValueError:
+    print("Sorry! That is not a valid input")
+    sys.exit()
 
-if check_birthdate(birthmonth, birthday, birthyear) == True:
-  calculate_age(birthmonth, birthday, birthyear)
+def check_brithdate(year, month, day):
+    birthdate = datetime(year, month, day, 00, 00)
+    difference = relativedelta.relativedelta(now, birthdate)
+    
+    return not((difference.years < 0) or (difference.months < 0) or (difference.days < 0))
+def calculate_age(year, month, day):
+    birthdate = datetime(year, month, day, 00, 00)
+    difference = relativedelta.relativedelta(now, birthdate)
+    print("You are %s years, %s months and %s days old" % (difference.years, difference.months, difference.days))
+
+if check_brithdate(iyears, imonths, idays) == True:
+    calculate_age(iyears, imonths, idays)
 else:
-  print("Invalid birthdate")
+    print("Invalid birthdate. Seems to be in the future!!!")
+    sys.exit()
